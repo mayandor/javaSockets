@@ -1,4 +1,9 @@
 package ejercicioUDP;
+/* 
+ * NOMBRE: MAYDA MARTHA ADUVIRI CONDORI
+ * PARALELO: JUEVES 16:00 - 18:00
+ * DOCENTE: LIC. RAMIRO GALLARDO
+ */
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
