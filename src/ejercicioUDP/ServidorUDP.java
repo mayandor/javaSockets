@@ -7,21 +7,20 @@ package ejercicioUDP;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.StringTokenizer;
 
 public class ServidorUDP {
 	
-	public static int contarPalabras(String frase) {
-		int con= 0;
-		for (int i = 0; i < frase.length(); i++) {
-			if(frase.charAt(i) == ' '){
-				con+=1;
-			}
+	public static String recuperar(String cad, int tam){
+		String res = "";
+		for (int i = 0; i < tam; i++) {
+			res+= cad.charAt(i);
 		}
-		return con+1;
+		return res;
 	}
-	
+
 	public static void main(String[] args) {
-		System.out.println("**Servidor UDP Iniciado**");
+		System.out.println("[*] Servidor UDP Iniciado");
 		System.out.println("Esperando cliente...");
 		try {
 			DatagramSocket socketUDP = new DatagramSocket(6543);
@@ -33,9 +32,12 @@ public class ServidorUDP {
 				//Almacenamos lo que nos envio el cliente
 				socketUDP.receive(peticion);
 				
-				//Llamamos al metodo  contar palabras
-				String frase = new String(peticion.getData()); 
-				String con= String.valueOf(contarPalabras(frase));
+				String res = new String(peticion.getData());
+				
+				String x= recuperar(res, peticion.getLength());
+				
+			    StringTokenizer st = new StringTokenizer(x);
+			    String con = String.valueOf(st.countTokens());
 				//Para enviar al cliente
 				byte [] enviar = con.getBytes();
 				DatagramPacket mensaje = new DatagramPacket(enviar, con.length() , peticion.getAddress(), peticion.getPort());
